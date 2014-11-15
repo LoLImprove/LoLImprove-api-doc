@@ -47,7 +47,7 @@ Replays related resources for the **LoLImprove API**
         ]
 
 ### Create a Replay [POST]
-**\<Authentificated>** Creates a new replay for the current user
+**\<Authentificated>** Creates a new replay for the **current user**
 
 + Request (application/json)
 
@@ -113,7 +113,7 @@ A replay entity and it's actions
         }
 
 ### Update a replay [PATCH]
-**\<Authentificated>** Updates the current user's replay
+**\<Authentificated>** Updates the **current user**'s replay
 
 + Request (application/json)
 
@@ -183,7 +183,41 @@ Users related resources for the **LoLImprove API**
                 updated_at: "2014-11-19 10:34:02"
             }
         ]
-        
+
+
+### Create an user [POST]
+**\<Authentificated>** Creates a new user
+
++ Request (application/json)
+
+        {
+            avatar: "https://avatars0.githubusercontent.com/u/1383633?v=3&s=100",
+            email: "support@lolimprove.com",
+            password: "$2a$10$1V8eNHwClr3wcuPXwfE9G.x.e8yodjsuiJPVa9wtkJXbpwge12s32",
+            name: "Diacred",
+            role: null,
+            last_request_at: "2014-11-12 18:55:18"
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
+
++ Response 201 (application/json)
+
+        {
+            id: 1
+            avatar: "https://avatars0.githubusercontent.com/u/1383633?v=3&s=100",
+            email: "support@lolimprove.com",
+            password: "$2a$10$1V8eNHwClr3wcuPXwfE9G.x.e8yodjsuiJPVa9wtkJXbpwge12s32",
+            name: "Diacred",
+            league: "Gold V",
+            role: null,
+            life_points: 0,
+            verified: false,
+            last_request_at: "2014-11-12 18:55:18"
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
+
 ## User [/users/{id}]
 An user entity and it's actions
 
@@ -240,3 +274,10 @@ When trying to update an inaccessible attribute a **Status 403** will be returne
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
+        
+# Group Analyses
+
+## Replay#Analyses [/replays/{id}/analyses/]
+
+### List all analyses
+
