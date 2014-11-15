@@ -5,7 +5,7 @@ LoL Improve APIARY is the documentation and mocking tool used inside the LoL Imp
 This is no public API, though, and CORS is not allowed, except on the mocking prototype.
 
 # Group Replay
-Replay related resources of the **LoLImprove API**
+Replay related resources for the **LoLImprove API**
 
 ## Replays [/replays]
 ### List all Replays [GET]
@@ -118,11 +118,72 @@ A single Replay object with all its details
 + Request (application/json)
 
         {
-            description: "Hello, world"
+            description: "Hello, world",
+            kda: "2/4/8"
         }
 
 + Response 200 (application/json)
 
+        {
+            id: 2
+            user_id: 2,
+            video_id: "QMujSbIkF8M",
+            lane: "mid",
+            champion: "ahri",
+            matchup: "zed",
+            victory: false,
+            kda: "2/4/8",
+            description: "Hello, world",
+            duration: "63:01",
+            patch: "4.16",
+            replay_file: null
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
+
 ### Remove a Replay [DELETE]
 + Response 204
 
+# Group User
+User related resources for the **LoLImprove API**
+
+## Users [/users]
+### List all users [GET]
+**\<Authentificated>** Get a list of all the users
+
++ Response 200 (application/json)
+
+        [
+            {
+                id: 1
+                avatar: "https://avatars0.githubusercontent.com/u/1383633?v=3&s=100",
+                email: "support@lolimprove.com",
+                password: "$2a$10$1V8eNHwClr3wcuPXwfE9G.x.e8yodjsuiJPVa9wtkJXbpwge12s32",
+                name: "Diacred",
+                league: "Gold V",
+                role: null,
+                life_points: 235,
+                verified: true,
+                last_request_at: "2014-11-19 10:34:02"
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-19 10:34:02"
+            },
+            {
+                id: 2
+                avatar: "https://avatars3.githubusercontent.com/u/9674065?v=3&s=100",
+                email: "support@lolimprove.com",
+                password: "$2a$10$1V8eNHwClr3wcuPXwfE9G.x.e8yodjsuiJPVa9wtkJXbpwge12s32",
+                name: "Klock",
+                league: "Challenger",
+                role: null,
+                life_points: 135,
+                verified: false,
+                last_request_at: "2014-11-19 10:34:02"
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-19 10:34:02"
+            }
+        ]
+        
+        
+        
+        
