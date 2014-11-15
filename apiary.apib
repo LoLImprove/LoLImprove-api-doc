@@ -47,6 +47,8 @@ Replay related resources of the **LoLImprove API**
         ]
 
 ### Create a Replay [POST]
+**\<Authentificated>** Creates a new replay for the current user
+
 + Request (application/json)
 
         {
@@ -109,6 +111,17 @@ A single Replay object with all its details
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
+
+### Update a replay [PATCH]
+**\<Authentificated>** Updates the current user's replay
+
++ Request (application/json)
+
+        {
+            description: "Hello, world"
+        }
+
++ Response 200 (application/json)
 
 ### Remove a Replay [DELETE]
 + Response 204
