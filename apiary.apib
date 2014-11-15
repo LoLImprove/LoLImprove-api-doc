@@ -29,7 +29,7 @@ Replay related resources of the **LoLImprove API**
                 updated_at: "2014-11-12 16:35:18"
             },
             {
-                id: 1
+                id: 2
                 user_id: 2,
                 video_id: "QMujSbIkF8M",
                 lane: "mid",
@@ -49,28 +49,67 @@ Replay related resources of the **LoLImprove API**
 ### Create a Replay [POST]
 + Request (application/json)
 
-        { "title": "Buy cheese and bread for breakfast." }
+        {
+            user_id: 2,
+            video_id: "QMujSbIkF8M",
+            lane: "mid",
+            champion: "ahri",
+            matchup: "zed",
+            victory: false,
+            kda: "1/4/8",
+            description: "I did a lot during the laning phase but didn't ward at all. When and where should I had warded ?",
+            duration: "63:01",
+            patch: "4.16",
+            replay_file: null
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
 
 + Response 201 (application/json)
 
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+        {
+            id: 2
+            user_id: 2,
+            video_id: "QMujSbIkF8M",
+            lane: "mid",
+            champion: "ahri",
+            matchup: "zed",
+            victory: false,
+            kda: "1/4/8",
+            description: "I did a lot during the laning phase but didn't ward at all. When and where should I had warded ?",
+            duration: "63:01",
+            patch: "4.16",
+            replay_file: null
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
 
-## Note [/notes/{id}]
-A single Note object with all its details
+## Replay [/replays/{id}]
+A single Replay object with all its details
 
 + Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
+    + id (required, number) ... Numeric id` of the replay to retrieve
 
-### Retrieve a Note [GET]
+### Retrieve a replay [GET]
 + Response 200 (application/json)
 
-    + Header
+        {
+            id: 2
+            user_id: 2,
+            video_id: "QMujSbIkF8M",
+            lane: "mid",
+            champion: "ahri",
+            matchup: "zed",
+            victory: false,
+            kda: "1/4/8",
+            description: "I did a lot during the laning phase but didn't ward at all. When and where should I had warded ?",
+            duration: "63:01",
+            patch: "4.16",
+            replay_file: null
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-19 10:34:02"
+        }
 
-            X-My-Header: The Value
-
-    + Body
-
-            { "id": 2, "title": "Pick-up posters from post-office" }
-
-### Remove a Note [DELETE]
+### Remove a Replay [DELETE]
 + Response 204
+
