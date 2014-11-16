@@ -9,7 +9,9 @@ This is no public API, though, and CORS is not allowed, except on the mocking pr
 ### **`current user`**
 Refers to an entity representing a **logged in user**, stored in the session and known *server side*.
 
-When an API call is based of the **current user** you don't need to provide anything in your request's body but **need to authenticate** first, though.
+When an API call is based of the **current user** you don't need to provide anything in your request's body but **need to authentificate** first, though.
+
+In the case where the request is **unauthentificated**, a **`403 Forbidden`** will be given as a response.
 
 # Group Users
 Users related resources for the **LoLImprove API**
@@ -328,11 +330,10 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
 
 # Group Analyses 
 
-## Publish [/analyses/{analysis_id}/publish]
+## Publish [/analyses/{id}/publish]
 
 + Parameters
-    + id (required, number) ... Numeric id of the replay that holds our analysis
-    + analysis_id (required, number) ... Numeric id of the analysis
+    + id (required, number) ... Numeric id of the analysis
     
 ### Publish an analysis [PATCH]
 **\<Authentificated>** Publish the specified **current user**'s analysis
@@ -354,10 +355,10 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
 ## Upvote [/analyses/{analysis_id}/vote]
 
 + Parameters
-    + id (required, number) ... Numeric id of the replay that holds our analysis
-    + analysis_id (required, number) ... Numeric id of the analysis
-    
+    + id (required, number) ... Numeric id of the analysis
+
 ### Upvote an analysis [PATCH]
+**\<Authentificated>** Publish the specified **current user**'s analysis
 
 + Response 200 (application/json)
 
