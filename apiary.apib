@@ -277,6 +277,8 @@ A replay entity and it's actions
         }
 
 ### Remove a Replay [DELETE]
+**\<Authentificated>** Removes a replay from the **current user**'s.
+
 + Response 204
 
 ## Analyses [/replays/{id}/analyses/]
@@ -352,7 +354,7 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
         }
  
         
-## Upvote [/analyses/{analysis_id}/vote]
+## Upvote [/analyses/{id}/vote]
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
@@ -373,9 +375,14 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             updated_at: "2014-11-19 10:39:02"
         }
 
-## Delete [/analyses/{analysis_id}/]
+## Delete [/analyses/{id}]
+
++ Parameters
+    + id (required, number) ... Numeric id of the analysis
 
 ### Remove an analysis [DELETE]
+**\<Authentificated>** Removes an analysis from the **current user**'s.
+
 + Response 204
 
 
@@ -391,7 +398,25 @@ A general note is **unique** for an analysis and created on behalf of the **curr
 + Parameters
     + id (required, number) ... Numeric id of the analysis
 
+### Fetch the general note [GET]
+Fetch the general note associated with an analysis.
+Notice the`analysis_id` in the response. Take care for it is only a complementary information.
+
+It's actually the `Analysis entity` that holds the `general_note_id`.
+
++ Response 200 (application/json)
+
+        {
+            id: 1,
+            analysis_id: 1, 
+            content: "I am a general comment, hey !",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+        }
+
+
 ### Create the general note [POST]
+**\<Authentificated>** Create a replay on behalf of the **current user**'s.
 Notice the`analysis_id` in the response. Take care for it is only a complementary information.
 
 It's actually the `Analysis entity` that holds the `general_note_id`.
@@ -413,7 +438,7 @@ It's actually the `Analysis entity` that holds the `general_note_id`.
         }
 
 ### Update the general note [PATCH]
-Only the **content** attribute can be updated.
+**\<Authentificated>** Only the **content** attribute can be updated.
 You don't need to pass the `general_note_id` as it is inferred from the replay's has_one relation.
 
 + Request (application/json)
@@ -427,7 +452,6 @@ You don't need to pass the `general_note_id` as it is inferred from the replay's
         {
             id: 1,
             analysis_id: 1, 
-            user_id: 2,
             content: "I am an updated general comment, hey !",
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
@@ -436,13 +460,165 @@ You don't need to pass the `general_note_id` as it is inferred from the replay's
 # Group Analysis#Timeline Entries
 An analysis can have **multiple timeline entries**. A timeline entry represents a comment one would have at a specific time in the replay.
 
-## Timeline [/analyses/{id}/timeline_entry]
+## Timeline [/analyses/{id}/timeline/entries]
+A Timeline entry is always created on behalf of the **current user**.
 
-### Create a new Timeline entry
++ Parameters
+    + id (required, number) ... Numeric id of the analysis
+
+
+### List all Timeline entries [GET]
+Fetch all the Timeline entries associated with an analysis.
 
 + Response 200 (application/json)
 
-        {}
+        [
+             {
+                id: 1,
+                analysis_id: 1, 
+                time: "02:55",
+                content: "I am a timeline entry !",
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-15 10:39:02"
+            },
+            {
+                id: 2,
+                analysis_id: 1, 
+                time: "05:43",
+                content: "I am an other timeline entry !",
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-15 10:39:02"
+            }
+        ]
+
+
+### Create a new Timeline entry [POST]
+**\<Authentificated>**
+
++ Request (application/json)
+
+        {
+            time: "02:55",
+            content: "I am a timeline entry !"
+        }
+
++ Response 200 (application/json)
+
+        {
+            id: 1,
+            analysis_id: 1, 
+            user_id: 2,
+            time: "02:55",
+            content: "I am a timeline entry !",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+        }
+
+## Timeline entry [/analyses/{id}/timeline/entries/{entry_id}]
+A Timeline entry is always updated on behalf of the **current user**.
+
++ Parameters
+    + id (required, number) ... Numeric id of the analysis
+    + entry_id (required, number) ... Numeric id of the entry
+
+### Update an entry [PATCH]
+**\<Authentificated>** Both the `time` and `content` attributes can be modified.
+
++ Request (application/json)
+
+        {
+            time: "02:58",
+            content: "I am an updated timeline entry !"
+        }
+
++ Response 200 (application/json)
+
+        {
+            id: 1,
+            analysis_id: 1, 
+            user_id: 2,
+            time: "02:58",
+            content: "I am an updated timeline entry !",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+        }
+
+
+### Remove a Timeline entry [DELETE]
+**\<Authentificated>** Removes a Timeline entry from the **current user**'s.
+
++ Response 204
+
+
+# Group Comments
+
+## Comments [/analyses/{id}/comments{?general_note_id,entry_id}]
+
++ Parameters
+    + general_note_id (optional, number) ... Numeric id of a General note
+    + entry_id (optional, number) ... Numeric id of a Timeline entry
+
+### List all comments for a ressource [GET]
+Get a list of all the comments for a given ressource.
+
+You **must** provide **either** a `general_node_id` or an `entry_id`.
+
+Providing none or providing both will result in a **status 500**.
+
++ Response 200
+
+        [
+            {
+                id: 1
+                user_id: 1,
+                commentable_id: 1,
+                content: "This is an example of speech !",
+                votes: 5,
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-15 10:39:02"
+            },
+            {
+                id: 1
+                user_id: 2,
+                commentable_id: 1,
+                content: "This is an other example of speech !",
+                votes: 5,
+                created_at: "2014-11-12 18:58:18",
+                updated_at: "2014-11-15 10:36:02"
+            }
+        ]
+    
+### Create a new comment for a ressource [POST]
+**\<Authentificated>** Creates a comment for a given ressource on behalf of the **current user**..
+
+You **must** provide **either** a `general_node_id` or an `entry_id`.
+
+Providing none or providing both will result in a **status 500**.
+
++ Response 200
+
+        [
+            {
+                id: 1
+                user_id: 1,
+                commentable_id: 1,
+                content: "This is an example of speech !",
+                votes: 5,
+                created_at: "2014-11-12 18:55:18",
+                updated_at: "2014-11-15 10:39:02"
+            },
+            {
+                id: 1
+                user_id: 2,
+                commentable_id: 1,
+                content: "This is an other example of speech !",
+                votes: 5,
+                created_at: "2014-11-12 18:58:18",
+                updated_at: "2014-11-15 10:36:02"
+            }
+        ]
+        
+## Comment [/analyses/{id}/comment/{comment_id}]
 
 
 
