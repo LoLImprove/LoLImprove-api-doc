@@ -574,6 +574,9 @@ A Timeline entry is always updated on behalf of the **current user**.
 # Group Comments
 
 ## Comments [/analyses/{id}/comments{?general_note_id,entry_id}]
+You **must** provide **either** a `general_node_id` or an `entry_id`.
+
+Providing none or providing both will result in a **status 500**.
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
@@ -583,10 +586,6 @@ A Timeline entry is always updated on behalf of the **current user**.
 ### List all comments for a ressource [GET]
 Get a list of all the comments for a given ressource.
 
-You **must** provide **either** a `general_node_id` or an `entry_id`.
-
-Providing none or providing both will result in a **status 500**.
-
 + Response 200 (application/json)
 
         [
@@ -594,8 +593,10 @@ Providing none or providing both will result in a **status 500**.
                 id: 1,
                 user_id: 1,
                 commentable_id: 1,
+                type: 'analysis',
                 content: "This is an example of speech !",
                 votes: 5,
+                reports: 0,
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-15 10:39:02"
             },
@@ -603,8 +604,10 @@ Providing none or providing both will result in a **status 500**.
                 id: 1,
                 user_id: 2,
                 commentable_id: 1,
+                type: 'analysis',
                 content: "This is an other example of speech !",
                 votes: 5,
+                reports: 0,
                 created_at: "2014-11-12 18:58:18",
                 updated_at: "2014-11-15 10:36:02"
             }
@@ -612,10 +615,6 @@ Providing none or providing both will result in a **status 500**.
     
 ### Create a new comment for a ressource [POST]
 **\<Authentificated>** Creates a comment for a given ressource on behalf of the **current user**..
-
-You **must** provide **either** a `general_node_id` or an `entry_id`.
-
-Providing none or providing both will result in a **status 500**.
 
 + Request (application/json)
 
@@ -630,8 +629,10 @@ Providing none or providing both will result in a **status 500**.
             id: 1,
             user_id: 1,
             commentable_id: 1,
+            type: 'analysis',
             content: "This is an example of speech !",
             votes: 0,
+            reports: 0,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -659,8 +660,10 @@ You may only update the `content` attribute.
             id: 1,
             user_id: 1,
             commentable_id: 1,
+            type: 'analysis',
             content: "This is updated an example of speech !",
             votes: 0,
+            reports: 0,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -686,8 +689,10 @@ You may only update the `content` attribute.
             id: 1,
             user_id: 1,
             commentable_id: 1,
+            type: 'analysis',
             content: "This is an example of speech !",
             votes: 1,
+            reports: 0,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -707,19 +712,66 @@ You may only update the `content` attribute.
             id: 1,
             user_id: 1,
             commentable_id: 1,
+            type: 'analysis',
             content: "This is an example of speech !",
             votes: 0,
+            reports: 0,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
 
 # Group Reports
 
-## TODO  [/]
+## Reports [/reports{?replay_id,analysis_id,comment_id,user_id}]
 When an analysis is reported it's status will be set to "reported". Only published analyses are to be displayed.
 
-### Todo [GET]
+You **must** provide **either** a `replay_id`, an `analysis_id, a `comment_id` or a `user_id`.
+
+Providing none or providing multiple ones will result in a **status 500**.
+
++ Parameters
+    + replay_id (optional, number) ... Numeric id of the replay
+    + analysis_id (optional, number) ... Numeric id of the analysis 
+    + comment_id (optional, number) ... Numeric id of the comment
+    + user_id (optional, number) ... Numeric id of the user
+
+### List all the reports for a ressource [GET]
+**\<Authentificated>** 
 
 + Response 200 (application/json)
 
-        {}
+        {
+            id: 1,
+            reportable_id: 1,
+            type: 'analysis',
+            user_id: 2,
+            category: "troll",
+            message: "The video is a video of My Little Pony",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+            
+        }
+        
+### Create a report [POST]
+**\<Authentificated>** A report is always created on behalf of the **current user**.
+
++ Request (application/json)
+
+        {
+            category: "troll",
+            message: "The video is a video of My Little Pony"
+        }
+
++ Response 200 (application/json)
+
+        {
+            id: 1,
+            reportable_id: 1,
+            type: 'analysis',
+            user_id: 2,
+            category: "troll",
+            message: "The video is a video of My Little Pony",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+            
+        }
