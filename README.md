@@ -3,4 +3,4 @@ LoLImprove-api-doc
 
 Apiary documentation and mocking for LoLImprove API
 
-LoLImprove API documentation : [On APIARY](http://docs.lolimprove.apiary.io/)
+LoLImprove API documentation : [http://docs.lolimprove.apiary.io/](http://docs.lolimprove.apiary.io/)
