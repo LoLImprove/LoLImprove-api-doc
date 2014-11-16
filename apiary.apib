@@ -372,11 +372,18 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
-        
-        
+
+## Delete [/analyses/{analysis_id}/]
+
+### Remove an analysis [DELETE]
++ Response 204
+
+
 # Group Analysis#General Note
 A general note is a **unique** entity that belongs to an analysis.
 It represents the general comments one would have concerning a replay.
+
+A general note **deletion** can only occur when the **associated replay is destroyed**.
 
 ## General note [/analyses/{id}/general_note]
 A general note is **unique** for an analysis and created on behalf of the **current user**.
@@ -400,19 +407,45 @@ It's actually the `Analysis entity` that holds the `general_note_id`.
         {
             id: 1,
             analysis_id: 1, 
-            user_id: 2,
             content: "I am a general comment, hey !",
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
 
 ### Update the general note [PATCH]
+Only the **content** attribute can be updated.
+You don't need to pass the `general_note_id` as it is inferred from the replay's has_one relation.
+
++ Request (application/json)
+
+        {
+            content: "I am an updated general comment, hey !"
+        }
+
++ Response 200 (application/json)
+
+        {
+            id: 1,
+            analysis_id: 1, 
+            user_id: 2,
+            content: "I am an updated general comment, hey !",
+            created_at: "2014-11-12 18:55:18",
+            updated_at: "2014-11-15 10:39:02"
+        }
+        
+# Group Analysis#Timeline Entries
+An analysis can have **multiple timeline entries**. A timeline entry represents a comment one would have at a specific time in the replay.
+
+## Timeline [/analyses/{id}/timeline_entry]
+
+### Create a new Timeline entry
 
 + Response 200 (application/json)
 
         {}
-        
-        
+
+
+
 # Group Reports
 
 ## TODO  [/]
