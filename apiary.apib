@@ -294,7 +294,7 @@ Fetches a list of analyses, for a given replay
             replay_id: 1,
             user_id: 2,
             votes: 15,
-            published: true,
+            status: "pending",
             general_note_id: 3,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
@@ -321,7 +321,7 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             replay_id: 2,
             user_id: 1,
             votes: 0,
-            published: false,
+            status: "pending",
             general_note_id: null,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
@@ -345,7 +345,7 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             replay_id: 2,
             user_id: 1,
             votes: 0,
-            published: true,
+            status: "published",
             general_note_id: null,
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
@@ -358,7 +358,7 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
     + id (required, number) ... Numeric id of the analysis
 
 ### Upvote an analysis [PATCH]
-**\<Authentificated>** Publish the specified **current user**'s analysis
+**\<Authentificated>** Upvotes the specified **current user**'s analysis
 
 + Response 200 (application/json)
 
@@ -372,4 +372,15 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
-    
+        
+        
+# Group Reports
+
+## TODO  [/]
+When an analysis is reported it's status will be set to "reported". Only published analyses are to be displayed.
+
+### [GET]
+
++ Response 200 (application/json)
+
+    {}
