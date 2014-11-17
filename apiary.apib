@@ -304,7 +304,7 @@ A replay entity and it's actions
     + id (required, number) ... Numeric id of the replay that holds our analyses
 
 ### List analyses [GET]
-Fetches a list of analyses for a replay replay, for the given ids.
+Fetches a list of analyses for a replay, for the given ids.
 
 + Request (application/json)
 
@@ -329,9 +329,9 @@ Fetches a list of analyses for a replay replay, for the given ids.
 ### Create an analysis [POST]
 **\<Authentificated>** Creates a new replay for the **current user**.
 
-Only the *replay_id* and the *user_id* are needed in order to create a new unpublished analysis.
+Only the `replay_id` and the `user_id` are needed in order to create a new unpublished analysis.
 
-**/!\** An analysis is unique replay-user-wise. An user can only analyse a replay once. Otherwise a **status 500** will be handed back.**/!\**
+**/!\** An analysis is unique replay-user-wise. An user can only analyse a replay once. Otherwise a **status 500** will be handed back. **/!\**
 
 + Request (application/json)
 
@@ -621,6 +621,8 @@ A Timeline entry is always updated on behalf of the **current user**.
 
 ### List all comments for a ressource [GET]
 Get a list of comments for a ressource for given ids.
+
++ Request (application/json)
 
         {
             comments_ids: [1, 2]
