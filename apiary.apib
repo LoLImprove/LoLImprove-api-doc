@@ -18,6 +18,8 @@ In the case where the request is **unauthentificated**, a **`403 Forbidden`** wi
 Users related resources for the **LoLImprove API**
 
 ## Users [/users]
+Users collection related actions
+
 ### List all users [GET]
 **\<Authentificated>** Get a list of all the users
 
@@ -34,7 +36,9 @@ Users related resources for the **LoLImprove API**
                 role: null,
                 life_points: 235,
                 verified: true,
-                last_request_at: "2014-11-19 10:34:02"
+                last_request_at: "2014-11-19 10:34:02",
+                analyses_ids: [4, 5, 6],
+                replay_ids: [4],
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-19 10:34:02"
             },
@@ -48,7 +52,9 @@ Users related resources for the **LoLImprove API**
                 role: null,
                 life_points: 135,
                 verified: false,
-                last_request_at: "2014-11-19 10:34:02"
+                last_request_at: "2014-11-19 10:34:02",
+                analyses_ids: [1, 2, 3],
+                replay_ids: [1, 2, 3],
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-19 10:34:02"
             }
@@ -80,7 +86,9 @@ Creates a new user
             role: null,
             life_points: 0,
             verified: false,
-            last_request_at: "2014-11-12 18:55:18"
+            last_request_at: "2014-11-12 18:55:18",
+            analyses_ids: [],
+            replay_ids: [],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -105,7 +113,9 @@ An user entity and it's actions
             role: null,
             life_points: 235,
             verified: true,
-            last_request_at: "2014-11-19 10:34:02"
+            last_request_at: "2014-11-19 10:34:02",
+            analyses_ids: [2, 3],
+            replay_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -137,7 +147,9 @@ When trying to update an inaccessible attribute a **Status 403** will be returne
             role: null,
             life_points: 235,
             verified: true,
-            last_request_at: "2014-11-19 10:34:02"
+            last_request_at: "2014-11-19 10:34:02",
+            analyses_ids: [2, 3],
+            replay_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -163,6 +175,7 @@ Replays related resources for the **LoLImprove API**
                 duration: "25:01",
                 patch: "4.19",
                 replay_file: null,
+                analyses_ids: [1, 2, 3],
                 created_at: "2014-11-12 16:35:18",
                 updated_at: "2014-11-12 16:35:18"
             },
@@ -178,7 +191,8 @@ Replays related resources for the **LoLImprove API**
                 description: "I did a lot during the laning phase but didn't ward at all. When and where should I had warded ?",
                 duration: "63:01",
                 patch: "4.16",
-                replay_file: null
+                replay_file: null,
+                analyses_ids: [4, 5, 6],
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-19 10:34:02"
             }
@@ -218,6 +232,7 @@ Replays related resources for the **LoLImprove API**
             duration: "63:01",
             patch: "4.16",
             replay_file: null,
+            analyses_ids: [],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -244,6 +259,7 @@ A replay entity and it's actions
             duration: "63:01",
             patch: "4.16",
             replay_file: null,
+            analyses_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -273,6 +289,7 @@ A replay entity and it's actions
             duration: "63:01",
             patch: "4.16",
             replay_file: null,
+            analyses_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:34:02"
         }
@@ -287,8 +304,14 @@ A replay entity and it's actions
 + Parameters
     + id (required, number) ... Numeric id of the replay that holds our analyses
 
-### List all analyses [GET]
-Fetches a list of analyses, for a given replay
+### List analyses [GET]
+Fetches a list of analyses for a replay replay, for the given ids.
+
++ Request (application/json)
+
+        {
+            analyses_ids: [1]
+        }
 
 + Response 200 (application/json)
 
@@ -299,6 +322,7 @@ Fetches a list of analyses, for a given replay
             votes: 15,
             status: "pending",
             general_note_id: 3,
+            timeline_entries_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
@@ -308,7 +332,7 @@ Fetches a list of analyses, for a given replay
 
 Only the *replay_id* and the *user_id* are needed in order to create a new unpublished analysis.
 
-**/!\** An analysis is unique replay-user-wise. An user can only analyse a replay once. **/!\**
+**/!\** An analysis is unique replay-user-wise. An user can only analyse a replay once. Otherwise a **status 500** will be handed back.**/!\**
 
 + Request (application/json)
 
@@ -326,6 +350,7 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             votes: 0,
             status: "pending",
             general_note_id: null,
+            timeline_entries_ids: [],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
@@ -339,7 +364,9 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
     + id (required, number) ... Numeric id of the analysis
     
 ### Publish an analysis [PATCH]
-**\<Authentificated>** Publish the specified **current user**'s analysis
+**\<Authentificated>** Publish the specified **current user**'s analysis.
+
+For an analysis to be published, it needs to have at least the **general note** set, otherwise a **status 500** will be handed back.
 
 + Response 200 (application/json)
 
@@ -349,7 +376,8 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             user_id: 1,
             votes: 0,
             status: "published",
-            general_note_id: null,
+            general_note_id: 1,
+            timeline_entries_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
@@ -361,7 +389,9 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
     + id (required, number) ... Numeric id of the analysis
 
 ### Upvote an analysis [PATCH]
-**\<Authentificated>** Upvotes the specified **current user**'s analysis
+**\<Authentificated>** Upvotes the specified **current user**'s analysis.
+
+For an analysis to be upvotes it needs to be **published**. Otherwise a **status 500** will be handed back.
 
 + Response 200 (application/json)
 
@@ -371,7 +401,8 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             user_id: 1,
             votes: 1,
             published: true,
-            general_note_id: null,
+            general_note_id: 1,
+            timeline_entries_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
@@ -382,7 +413,9 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
     + id (required, number) ... Numeric id of the analysis
 
 ### Downvote an analysis [PATCH]
-**\<Authentificated>** Downvotes the specified **current user**'s analysis
+**\<Authentificated>** Downvotes the specified **current user**'s analysis.
+
+For an analysis to be downvoted it needs to be **published**. Otherwise a **status 500** will be handed back.
 
 + Response 200 (application/json)
 
@@ -392,7 +425,8 @@ Only the *replay_id* and the *user_id* are needed in order to create a new unpub
             user_id: 1,
             votes: 0,
             published: true,
-            general_note_id: null,
+            general_note_id: 1,
+            timeline_entries_ids: [1, 2, 3],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-19 10:39:02"
         }
@@ -422,9 +456,6 @@ A general note is **unique** for an analysis and created on behalf of the **curr
 
 ### Fetch the general note [GET]
 Fetch the general note associated with an analysis.
-Notice the`analysis_id` in the response. Take care for it is only a complementary information.
-
-It's actually the `Analysis entity` that holds the `general_note_id`.
 
 + Response 200 (application/json)
 
@@ -432,6 +463,7 @@ It's actually the `Analysis entity` that holds the `general_note_id`.
             id: 1,
             analysis_id: 1, 
             content: "I am a general comment, hey !",
+            comments_ids: [1, 2],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -455,6 +487,7 @@ It's actually the `Analysis entity` that holds the `general_note_id`.
             id: 1,
             analysis_id: 1, 
             content: "I am a general comment, hey !",
+            comments_ids: [],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -475,6 +508,7 @@ You don't need to pass the `general_note_id` as it is inferred from the replay's
             id: 1,
             analysis_id: 1, 
             content: "I am an updated general comment, hey !",
+            comments_ids: [1, 2],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -483,13 +517,18 @@ You don't need to pass the `general_note_id` as it is inferred from the replay's
 An analysis can have **multiple timeline entries**. A timeline entry represents a comment one would have at a specific time in the replay.
 
 ## Timeline [/analyses/{id}/timeline/entries]
-A Timeline entry is always created on behalf of the **current user**.
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
 
-### List all Timeline entries [GET]
-Fetch all the Timeline entries associated with an analysis.
+### List Timeline entries [GET]
+Fetch the Timeline entries associated with an analysis for the given ids.
+
++ Request (application/json)
+
+        {
+            timeline_entries_ids: [1, 2]
+        }
 
 + Response 200 (application/json)
 
@@ -499,6 +538,7 @@ Fetch all the Timeline entries associated with an analysis.
                 analysis_id: 1, 
                 time: "02:55",
                 content: "I am a timeline entry !",
+                comments_ids: [1, 2],
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-15 10:39:02"
             },
@@ -507,6 +547,7 @@ Fetch all the Timeline entries associated with an analysis.
                 analysis_id: 1, 
                 time: "05:43",
                 content: "I am an other timeline entry !",
+                comments_ids: [1, 2],
                 created_at: "2014-11-12 18:55:18",
                 updated_at: "2014-11-15 10:39:02"
             }
@@ -514,6 +555,8 @@ Fetch all the Timeline entries associated with an analysis.
 
 
 ### Create a new Timeline entry [POST]
+A Timeline entry is always created on behalf of the **current user**.
+
 **\<Authentificated>**
 
 + Request (application/json)
@@ -531,6 +574,7 @@ Fetch all the Timeline entries associated with an analysis.
             user_id: 2,
             time: "02:55",
             content: "I am a timeline entry !",
+            comments_ids: [],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -560,6 +604,7 @@ A Timeline entry is always updated on behalf of the **current user**.
             user_id: 2,
             time: "02:58",
             content: "I am an updated timeline entry !",
+            comments_ids: [1, 2],
             created_at: "2014-11-12 18:55:18",
             updated_at: "2014-11-15 10:39:02"
         }
@@ -573,19 +618,15 @@ A Timeline entry is always updated on behalf of the **current user**.
 
 # Group Comments
 
-## Comments [/analyses/{id}/comments{?general_note_id,entry_id}]
-You **must** provide **either** a `general_node_id` or an `entry_id`.
-
-Providing none or providing both will result in a **status 500**.
-
-+ Parameters
-    + id (required, number) ... Numeric id of the analysis
-    + general_note_id (optional, number) ... Numeric id of a General note
-    + entry_id (optional, number) ... Numeric id of a Timeline entry
+## Comments [/comments]
 
 ### List all comments for a ressource [GET]
-Get a list of all the comments for a given ressource.
+Get a list of comments for a ressource for given ids.
 
+        {
+            comments_ids: [1, 2]
+        }
+        
 + Response 200 (application/json)
 
         [
@@ -601,7 +642,7 @@ Get a list of all the comments for a given ressource.
                 updated_at: "2014-11-15 10:39:02"
             },
             {
-                id: 1,
+                id: 2,
                 user_id: 2,
                 commentable_id: 1,
                 type: 'analysis',
@@ -619,7 +660,7 @@ Get a list of all the comments for a given ressource.
 + Request (application/json)
 
         {
-            general_note_id: 1,
+            type: 'analysis',
             content: "This is an example of speech !"
         }
 
@@ -673,7 +714,6 @@ You may only update the `content` attribute.
 
 + Response 204
 
-        
 ## Upvote [/analyses/{id}/comment/{comment_id}/upvote]
 
 + Parameters
@@ -723,9 +763,7 @@ You may only update the `content` attribute.
 # Group Reports
 
 ## Reports [/reports{?replay_id,analysis_id,comment_id,user_id}]
-When an analysis is reported it's status will be set to "reported". Only published analyses are to be displayed.
-
-You **must** provide **either** a `replay_id`, an `analysis_id, a `comment_id` or a `user_id`.
+You **must** provide **either** a `replay_id`, an `analysis_id`, a `comment_id` or a `user_id`.
 
 Providing none or providing multiple ones will result in a **status 500**.
 
@@ -751,13 +789,21 @@ Providing none or providing multiple ones will result in a **status 500**.
             updated_at: "2014-11-15 10:39:02"
             
         }
-        
+
+## Reports [/reports]
+
 ### Create a report for a ressource [POST]
 **\<Authentificated>** A report is always created on behalf of the **current user**.
+
+When an analysis is reported it's status will be set to **"reported"**. Only published analyses are to be displayed.
+
+The type of the ressource to report (i.e : 'comment', 'analysis') must be specified.
+
 
 + Request (application/json)
 
         {
+            type: "analysis",
             category: "troll",
             message: "The video is a video of My Little Pony"
         }
