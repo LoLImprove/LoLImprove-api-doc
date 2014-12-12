@@ -358,6 +358,33 @@ Only the `replay_id` and the `user_id` are needed in order to create a new unpub
 
 # Group Analysis
 
+## Analysis [/analyses/{id}]
+
++ Parameters
+    + id (required, number) ... Numeric id of the analysis
+
+### Fetch analysis [GET]
+**\<Authentificated>** Get the specified analysis.
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "replay_id": 1,
+            "user_id": 2,
+            "votes": 15,
+            "status": "pending",
+            "general_note_id": 3,
+            "timeline_entries_ids": [1, 2, 3],
+            "created_at": "2014-11-12 18:55:18",
+            "updated_at": "2014-11-19 10:39:02"
+        }
+
+### Remove an analysis [DELETE]
+**\<Authentificated>** Removes an analysis from the **current user**'s.
+
++ Response 204
+
 ## Publish [/analyses/{id}/publish]
 
 + Parameters
@@ -430,17 +457,6 @@ For an analysis to be downvoted it needs to be **published**. Otherwise a **stat
             "created_at": "2014-11-12 18:55:18",
             "updated_at": "2014-11-19 10:39:02"
         }
-
-## Delete [/analyses/{id}]
-
-+ Parameters
-    + id (required, number) ... Numeric id of the analysis
-
-### Remove an analysis [DELETE]
-**\<Authentificated>** Removes an analysis from the **current user**'s.
-
-+ Response 204
-
 
 # Group Analysis#General Note
 A general note is a **unique** entity that belongs to an analysis.
