@@ -298,11 +298,14 @@ A replay entity and it's actions
 
 + Response 204
 
-## Analyses [/replays/{id}/analyses/]
+
+# Group Analysis
+
+## Analyses [/replays/{replay_id}/analyses/]
 Nested replay analyses
 
 + Parameters
-    + id (required, number) ... Numeric id of the replay that holds our analyses
+    + replay_id (required, number) ... Numeric id of the replay that holds our analyses
 
 ### List analyses [GET]
 Fetches a list of analyses for a replay, for the given ids.
@@ -356,15 +359,19 @@ Only the `replay_id` and the `user_id` are needed in order to create a new unpub
         }
 
 
-# Group Analysis
-
-## Analysis [/analyses/{id}]
+## Analyses [/replays/{replay_id}/analyses/{id}]
+Nested replay analyses
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
+    + replay_id (required, number) ... Numeric id of the replay that holds our analyses
+    
 
 ### Fetch analysis [GET]
 **\<Authentificated>** Get the specified analysis.
+
++ Parameters
+    + id (required, number) ... Numeric id of the analysis
 
 + Response 200 (application/json)
 
