@@ -119,7 +119,7 @@ An user entity and it's actions
             "updated_at": "2014-11-19 10:34:02"
         }
 
-### Update an user [PATCH]
+### Update an user [PUT]
 **\<Authentificated>** Update an user's attributes. Some attributes should not be updated through this *API* and therefore only a few can be included :
 - avatar
 - email
@@ -263,7 +263,7 @@ A replay entity and it's actions
             "updated_at": "2014-11-19 10:34:02"
         }
 
-### Update a replay [PATCH]
+### Update a replay [PUT]
 **\<Authentificated>** Updates the **current user**'s replay
 
 + Request (application/json)
@@ -360,12 +360,12 @@ Only the `replay_id` and the `user_id` are needed in order to create a new unpub
 
 
 ## Analysis [/replays/{replay_id}/analyses/{id}]
-Nested replay analysis 
+Nested replay analysis
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
     + replay_id (required, number) ... Numeric id of the replay that holds our analyses
-    
+
 
 ### Fetch analysis [GET]
 **\<Authentificated>** Get the specified analysis.
@@ -519,7 +519,7 @@ It's actually the `Analysis entity` that holds the `general_note_id`.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-### Update the general note [PATCH]
+### Update the general note [PUT]
 **\<Authentificated>** Only the **content** attribute can be updated.
 You don't need to pass the `general_note_id` as it is inferred from the replay's has_one relation.
 
@@ -631,7 +631,7 @@ A Timeline entry is always updated on behalf of the **current user**.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-### Update an entry [PATCH]
+### Update an entry [PUT]
 **\<Authentificated>** Both the `time` and `content` attributes can be modified.
 
 + Request (application/json)
@@ -730,7 +730,7 @@ Get a list of comments for a ressource for given ids.
 + Parameters
     + id (required, number) ... Numeric id of the comment
 
-### Update a comment [PATCH]
+### Update a comment [PUT]
 **\<Authentificated>** Updates a comment on behalf of the **current user**.
 
 You may only update the `content` attribute.
