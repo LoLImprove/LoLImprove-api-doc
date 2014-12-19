@@ -359,8 +359,8 @@ Only the `replay_id` and the `user_id` are needed in order to create a new unpub
         }
 
 
-## Analyses [/replays/{replay_id}/analyses/{id}]
-Nested replay analyses
+## Analysis [/replays/{replay_id}/analyses/{id}]
+Nested replay analysis 
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
@@ -392,7 +392,7 @@ Nested replay analyses
 
 + Response 204
 
-## Publish [/analyses/{id}/publish]
+## Publish [/replays/{replay_id}/analyses/{id}/publish]
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
@@ -417,7 +417,7 @@ For an analysis to be published, it needs to have at least the **general note** 
         }
 
 
-## Upvote [/analyses/{id}/upvote]
+## Upvote [/replays/{replay_id}/analyses/{id}/upvote]
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
@@ -441,7 +441,7 @@ For an analysis to be upvotes it needs to be **published**. Otherwise a **status
             "updated_at": "2014-11-19 10:39:02"
         }
 
-## Downvote [/analyses/{id}/downvote]
+## Downvote [/replays/{replay_id}/analyses/{id}/downvote]
 
 + Parameters
     + id (required, number) ... Numeric id of the analysis
