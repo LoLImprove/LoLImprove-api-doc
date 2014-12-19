@@ -708,11 +708,10 @@ Get a list of comments for a ressource for given ids.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-## Comment [/analyses/{id}/comment/{comment_id}]
+## Comment [/comment/{id}]
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
-    + comment_id (required, number) ... Numeric id of the comment
+    + id (required, number) ... Numeric id of the comment
 
 ### Update a comment [PATCH]
 **\<Authentificated>** Updates a comment on behalf of the **current user**.
@@ -744,11 +743,10 @@ You may only update the `content` attribute.
 
 + Response 204
 
-## Upvote [/analyses/{id}/comment/{comment_id}/upvote]
+## Upvote [/comment/{id}/upvote]
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
-    + comment_id (required, number) ... Numeric id of the comment
+    + id (required, number) ... Numeric id of the comment
 
 ### Upvote a comment [PATCH]
 **\<Authentificated>** Upvotes a comment on behalf of the **current user**.
@@ -767,11 +765,10 @@ You may only update the `content` attribute.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-## Downvote [/analyses/{id}/comment/{comment_id}/downvote]
+## Downvote [/comment/{id}/downvote]
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
-    + comment_id (required, number) ... Numeric id of the comment
+    + id (required, number) ... Numeric id of the comment
 
 ### Downvote a comment [PATCH]
 **\<Authentificated>** Downvotes a comment on behalf of the **current user**.
