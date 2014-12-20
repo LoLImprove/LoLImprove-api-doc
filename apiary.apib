@@ -471,11 +471,12 @@ It represents the general comments one would have concerning a replay.
 
 A general note **deletion** can only occur when the **associated replay is destroyed**.
 
-## General note [/analyses/{id}/general_note]
+## General note [/analyses/{analysis_id}/general_note/{id}]
 A general note is **unique** for an analysis and created on behalf of the **current user**.
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
+    + analysis_id (required, number) ... Numeric id of the analysis
+    + id (required, number) ... Numeric id of the general note
 
 ### Fetch the general note [GET]
 Fetch the general note associated with an analysis.
@@ -492,6 +493,7 @@ Fetch the general note associated with an analysis.
             "updated_at": "2014-11-15 10:39:02"
         }
 
+## General notes [/analyses/{analysis_id}/general_note]
 
 ### Create the general note [POST]
 **\<Authentificated>** Create a replay on behalf of the **current user**'s.
