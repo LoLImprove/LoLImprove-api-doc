@@ -725,10 +725,29 @@ Get a list of comments for a ressource for given ids.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-## Comment [/comment/{id}]
+## Comment [/comments/{id}]
 
 + Parameters
     + id (required, number) ... Numeric id of the comment
+
+
+### Fetch a comment [GET]
+Fetch a comment
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "user_id": 1,
+            "commentable_id": 1,
+            "type": 'analysis',
+            "content": "This is an example of speech !",
+            "votes": 0,
+            "reports": 0,
+            "created_at": "2014-11-12 18:55:18",
+            "updated_at": "2014-11-15 10:39:02"
+        }
+
 
 ### Update a comment [PUT]
 **\<Authentificated>** Updates a comment on behalf of the **current user**.
