@@ -544,10 +544,10 @@ You don't need to pass the `general_note_id` as it is inferred from the replay's
 # Group Analysis#Timeline Entries
 An analysis can have **multiple timeline entries**. A timeline entry represents a comment one would have at a specific time in the replay.
 
-## Timeline [/analyses/{id}/timeline/entries]
+## Timeline [/analyses/{analysis_id}/timeline/entries]
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
+    + analysis_id (required, number) ... Numeric id of the analysis
 
 ### List Timeline entries [GET]
 Fetch the Timeline entries associated with an analysis for the given ids.
@@ -609,12 +609,27 @@ A Timeline entry is always created on behalf of the **current user**.
             "updated_at": "2014-11-15 10:39:02"
         }
 
-## Timeline entry [/analyses/{id}/timeline/entries/{entry_id}]
+## Timeline entry [/analyses/{analysis_id}/timeline/entries/{id}]
 A Timeline entry is always updated on behalf of the **current user**.
 
 + Parameters
-    + id (required, number) ... Numeric id of the analysis
-    + entry_id (required, number) ... Numeric id of the entry
+    + analysis_id (required, number) ... Numeric id of the analysis
+    + id (required, number) ... Numeric id of the entry
+
+### Get an entry [PATCH]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "analysis_id": 1,
+            "user_id": 2,
+            "time": "02:58",
+            "content": "I am a timeline entry !",
+            "comments_ids": [1, 2],
+            "created_at": "2014-11-12 18:55:18",
+            "updated_at": "2014-11-15 10:39:02"
+        }
 
 ### Update an entry [PATCH]
 **\<Authentificated>** Both the `time` and `content` attributes can be modified.
